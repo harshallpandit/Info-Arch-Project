@@ -48,7 +48,7 @@ h1,h2,h3,h4,h5,h6,label,p{
 }
 
 .box_1 h3 {
-	color: #5BBD50;
+	color: #FFFFFF;
 	font-size: 1.2em;
 	margin-bottom: 0;
 	float: left;
@@ -60,7 +60,39 @@ a.simpleCart_empty {
 	font-size: 0.85em;
 	color: #5BBD50;
 }
+.orderBtn {
+  background: #c62d1f;
+  background-image: -webkit-linear-gradient(top, #c62d1f, #c62d1f);
+  background-image: -moz-linear-gradient(top, #c62d1f, #c62d1f);
+  background-image: -ms-linear-gradient(top, #c62d1f, #c62d1f);
+  background-image: -o-linear-gradient(top, #c62d1f, #c62d1f);
+  background-image: linear-gradient(to bottom, #c62d1f, #c62d1f);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
 
+.orderBtn:hover {
+  background: #f24437;
+  background-image: -webkit-linear-gradient(top, #f24437, #f24437);
+  background-image: -moz-linear-gradient(top, #f24437, #f24437);
+  background-image: -ms-linear-gradient(top, #f24437, #f24437);
+  background-image: -o-linear-gradient(top, #f24437, #f24437);
+  background-image: linear-gradient(to bottom, #f24437, #f24437);
+  color: #ffffff;
+  text-decoration: none;
+}
+.chef {
+  font-family: 'Raleway', sans-serif;
+  font-size: 4em;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
 
 
 
@@ -93,7 +125,7 @@ i.glyphicon.glyphicon-menu-hamburger {
 }
 /*--banner--*/
 .header{
-	background:url(../images/2.jpg) no-repeat left;
+	background:url(../images/bg1.jpg) no-repeat left;
 	width:100%;
 	background-size:cover;
 	min-height:750px;
@@ -109,9 +141,10 @@ i.glyphicon.glyphicon-menu-hamburger {
 	margin-top: 10em;	
 }
 .banner h4 {
-    color:#97824B;
+    /*color:#97824B;*/
+    color: #FFFFFF;
     font-size: 3em;
-    border: 2px solid #fff;
+    border: 2px solid #c62d1f;
     padding: 1em;
     width: 50%;
     margin: 0 auto;
@@ -130,8 +163,8 @@ i.glyphicon.glyphicon-menu-hamburger {
     margin: 2em 0;
 }
 .down {
-    margin-top: 8em;
-    display: block;
+    margin-top: 12em;
+    display: inline;
 }
 /*--content--*/
 .hover-fold {
@@ -228,6 +261,18 @@ i.glyphicon.glyphicon-menu-hamburger {
 }
 .hover-fold .bottom2{
   background: url(../images/aa2.jpg) bottom;
+}
+.hover-fold .front3 {
+  background: url(../images/aa3.jpg) top;
+}
+.hover-fold .bottom3{
+  background: url(../images/aa3.jpg) bottom;
+}
+.hover-fold .front4 {
+  background: url(../images/aa4.jpg) top;
+}
+.hover-fold .bottom4{
+  background: url(../images/aa4.jpg) bottom;
 }
 /*--content--*/
 .content-top-top {

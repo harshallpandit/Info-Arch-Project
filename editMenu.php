@@ -4,6 +4,8 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<?php
+	session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,18 +39,53 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header head">
 	<div class="container">
 		<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
-			<h1><a href="index.html"><span>C</span><img src="images/oo.png" alt=""><img src="images/oo.png" alt="">kery</a></h1>
+			<h1><a href="index.html"><img src="images/oo.png" alt=""><span>Amrit India</span><img src="images/oo.png" alt=""></a></h1>
 		</div>
+		<div class="header-right">
+						<div class="cart box_1">
+							<a href="checkout.php">
+								<h3> <span class="simpleCart_total"> <?php echo $_SESSION['price'] ?> </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?php echo count($_SESSION['items']) ?> </span> items)<img src="images/bag.png" width="25" height="25" alt=""></h3>
+							</a>	
+							<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
 		<div class="nav-icon">		
 			<a href="#" class="navicon"></a>
 				<div class="toggle">
 					<ul class="toggle-menu">
-						<li><a  href="index.html">Home</a></li>
-						<li><a class="active" href="menu.html">Menu</a></li>
-						<li><a  href="blog.html">Blog</a></li>
-						<li><a  href="typo.html">Codes</a></li>
-						<li><a  href="events.html">Events</a></li>
-						<li><a  href="contact.html">Contact</a></li>
+						<li><a class="active" href="index.php">Home</a></li>
+                        
+                        <?php 
+                        if (!isset($_SESSION['username'])) { ?>
+<!--                        //no one logged in-->
+                <li><a  href="userDash.php">Login</a></li>    
+                <li><a  href="menu.php">Order</a></li>
+                <li><a  href="menu.php">Menu</a></li>         
+                <li><a  href="contact.php">Contact</a></li>
+                        
+                         <?php } else{  
+                        $email =  $_SESSION['username'];
+
+                            $query = "SELECT userType FROM user WHERE email='$email'"; 
+        $db = mysqli_connect('localhost', 'root', 'root', 'AmritIndia');
+        $results = mysqli_query($db, $query);
+        $row = mysqli_fetch_array($results, MYSQLI_NUM);
+                           // echo $row[0];
+                          if($row[0] == "admin"){  
+                        ?>
+  <li><a  href="order.php">Admin Dashboard</a></li>                     
+ <li><a href="userDash.php?logout='1'" >Logout</a></li>    
+						<li><a  href="menu.php">Menu View</a></li>
+       <li><a  href="editMenu.php"> Edit Menu</a></li>       
+                <li><a  href="contact.php">Contact</a></li>     
+                         <?php } else{?>
+  <li><a  href="userDash.php">User Dashboard</a></li>                     
+ <li><a href="userDash.php?logout='1'" >Logout</a></li>
+                        <li><a  href="menu.php">Order</a></li><li><a  href="menu.php">Menu </a></li>
+                <li><a  href="contact.php">Contact</a></li> 
+                         <?php }} ?>
+						
 					</ul>
 				</div>
 			<script>
@@ -127,12 +164,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   				<div class="modal-content">
     				<button id="close" onclick="closeModal(<?php echo $row["id"]?>)" class="close" value="button">&times;</button>
     				<form action="updateMenu.php" method="post" enctype="multipart/form-data">
-						Name: <input type="text" name="name" value="<?php echo $row["name"]?>" /><br/><br/>
-						Description: <textarea name="description" value=""><?php echo $row["description"]?></textarea><br/><br/>
-						Price: <input type="text" name="price" value="<?php echo $row["price"]?>" /><br/><br/>
+						<div class="form-group">
+						<label>Name: </label>
+						<input type="text" name="name" class="form-control" value="<?php echo $row["name"]?>" /><br/><br/>
+						</div>
+						
+						<div class="form-group">
+							<label>Description: </label> 
+							<textarea name="description" class="form-control" value=""><?php echo $row["description"]?></textarea><br/><br/>
+						</div>
+
+						<div class="form-group">
+							<label>Price: </label>
+							<input type="text" class="form-control" name="price" value="<?php echo $row["price"]?>" /><br/><br/>
+						</div>
 						<input type="file" name="image"/><br/><br/>
 						<input type="hidden" name="id" value="<?php echo $row["id"]?>">
-						<input type="submit" name="submit" value="submit"/>
+						<input type="submit" class="btn btn-primary form-control" name="submit" value="submit"/>
 					</form>
   				</div>
 			</div>
@@ -154,7 +202,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="col-md-7 buy">
 							<span>$<?php echo $row["price"]?></span>
-							<button class="morebtn hvr-rectangle-in" id="<?php echo $row["id"]?>" onclick="edit(<?php echo $row["id"]?>)">edit</a>
+							<button class="btn btn-success" id="<?php echo $row["id"]?>" onclick="edit(<?php echo $row["id"]?>)">edit</a>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -197,7 +245,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a  href="menu.html">Menu</a></li>
 						<li><a  href="blog.html">Blog</a></li>
 						<li><a  href="events.html">Events</a></li>
-						<li><a  href="contact.html">Contact</a></li>
+						<li><a  href="contact.php">Contact</a></li>
 					</ul>					
 						<span>There are many variations of passages</span>
 				</div>

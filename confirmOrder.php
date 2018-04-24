@@ -1,3 +1,5 @@
+<?php
+	session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +33,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <div class="header head">
 	<div class="container">
-		<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
-			<h1><a href="index.html"><span>C</span><img src="images/oo.png" alt=""><img src="images/oo.png" alt="">kery</a></h1>
+			
+			<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
+			<h1><a href="index.html"><img src="images/oo.png" alt=""><span>Amrit India</span><img src="images/oo.png" alt=""></a></h1>
 		</div>
 		<div class="header-right">
 			<div class="cart box_1">
@@ -43,16 +46,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"> </div>
 			</div>
 		</div>
-		<div class="nav-icon">		
+				<div class="nav-icon">		
 			<a href="#" class="navicon"></a>
 				<div class="toggle">
 					<ul class="toggle-menu">
-						<li><a  href="index.html">Home</a></li>
-						<li><a class="active" href="menu.html">Menu</a></li>
-						<li><a  href="blog.html">Blog</a></li>
-						<li><a  href="typo.html">Codes</a></li>
-						<li><a  href="events.html">Events</a></li>
-						<li><a  href="contact.html">Contact</a></li>
+						<li><a class="active" href="index.php">Home</a></li>
+                        
+                        <?php 
+                        if (!isset($_SESSION['username'])) { ?>
+<!--                        //no one logged in-->
+                <li><a  href="userDash.php">Login</a></li>    
+                <li><a  href="menu.php">Order</a></li>
+                <li><a  href="menu.php">Menu</a></li>         
+                <li><a  href="contact.php">Contact</a></li>
+                        
+                         <?php } else{  
+                        $email =  $_SESSION['username'];
+
+                            $query = "SELECT userType FROM user WHERE email='$email'"; 
+        $db = mysqli_connect('localhost', 'root', 'root', 'AmritIndia');
+        $results = mysqli_query($db, $query);
+        $row = mysqli_fetch_array($results, MYSQLI_NUM);
+                           // echo $row[0];
+                          if($row[0] == "admin"){  
+                        ?>
+  <li><a  href="order.php">Admin Dashboard</a></li>                     
+ <li><a href="userDash.php?logout='1'" >Logout</a></li>    
+						<li><a  href="menu.php">Menu View</a></li>
+       <li><a  href="editMenu.php"> Edit Menu</a></li>       
+                <li><a  href="contact.php">Contact</a></li>     
+                         <?php } else{?>
+  <li><a  href="userDash.php">User Dashboard</a></li>                     
+ <li><a href="userDash.php?logout='1'" >Logout</a></li>
+                        <li><a  href="menu.php">Order</a></li><li><a  href="menu.php">Menu </a></li>
+                <li><a  href="contact.php">Contact</a></li> 
+                         <?php }} ?>
+						
 					</ul>
 				</div>
 			<script>
@@ -77,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				$username = "root";
 				$password = "root";
 				$dbname = "amritindia";
-
+				$email = $_SESSION['username'];
 				$conn = new mysqli($servername, $username, $password, $dbname);
 				if ($conn->connect_error) {
 				    die("Connection failed: " . $conn->connect_error);
@@ -96,7 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					}
 				}
 				$pending = "pending"; 
-				$sql = "insert into amritindia.order (items, price, orderDate, status)values('$purchase', '$price', '$orderDate', '$pending')";
+				$sql = "insert into amritindia.order (email, items, price, orderDate, status)values('$email', '$purchase', '$price', '$orderDate', '$pending')";
 				
 				if($conn->query($sql)) {	
 		?>
@@ -141,6 +170,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<?php
 				}
 						$conn->close();
+						header("Location: userDash.php");
 		}
 ?>
 ?>
@@ -152,16 +182,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul class=" in">
 						<li><a href="index.html">Home</a></li>
 						<li><a  href="menu.html">Menu</a></li>
-						<li><a  href="blog.html">Blog</a></li>
 						<li><a  href="events.html">Events</a></li>
-						<li><a  href="contact.html">Contact</a></li>
+						<li><a  href="contact.php">Contact</a></li>
 					</ul>					
-						<span>There are many variations of passages</span>
 				</div>
 				<div class="col-md-4 footer-bottom  animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
 					<h2>Follow Us</h2>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.</p>
 					<ul class="social-ic">
 						<li><a href="#"><i></i></a></li>
 						<li><a href="#"><i class="ic"></i></a></li>

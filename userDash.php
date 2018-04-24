@@ -1,16 +1,27 @@
-<!--A Design by W3layouts 
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<?php
-	session_start();?>
+<?php 
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: index.php");
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Amrit India Menu</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	
+  
+<title> Amrit India</title>
+
+  <link rel="stylesheet" type="text/css" href="/css/loginstyle.css">
+    <link href="css/loginstyle.css" rel="stylesheet">
+
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
@@ -33,25 +44,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  new WOW().init();
 </script>
 <!-- //animation-effect -->
-
+    
+    
+    
 </head>
 <body>
-<div class="header head">
+    <div class="header head">
 	<div class="container">
 		<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
 			<h1><a href="index.html"><img src="images/oo.png" alt=""><span>Amrit India</span><img src="images/oo.png" alt=""></a></h1>
 		</div>
-		<!--- Cart -->
 		<div class="header-right">
-						<div class="cart box_1">
-							<a href="checkout.php">
-								<h3> <span class="simpleCart_total"> <?php echo $_SESSION['price'] ?> </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?php echo count($_SESSION['items']) ?> </span> items)<img src="images/bag.png" width="25" height="25" alt=""></h3>
-							</a>	
-							<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
-							<div class="clearfix"> </div>
-						</div>
-					</div>
-		<div class="nav-icon">		
+			<div class="cart box_1">
+				<a href="checkout.php">
+					<h3> <span class="simpleCart_total"> <?php echo $_SESSION['price'] ?> </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?php echo count($_SESSION['items']) ?> </span> items)<img src="images/bag.png" width="25" height="25" alt=""></h3>
+				</a>	
+				<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+				<div class="nav-icon">		
 			<a href="#" class="navicon"></a>
 				<div class="toggle">
 					<ul class="toggle-menu">
@@ -102,41 +114,80 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- start search-->	
 		
 </div>
-<!--content-->
-	<div class="menu">
-		<div class="container">
-			<div class="menu-top">
-				<div class="col-md-4 menu-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-					<h3>Add Menu Item</h3>
-					<label><i class="glyphicon glyphicon-menu-up"></i></label>
-					<span>Enter details below - </span>
+<?php 
+	$username = $_SESSION['username'];
+	$db = mysqli_connect('localhost', 'root', 'root', 'AmritIndia');
+	$results = mysqli_query($db, "SELECT * FROM amritindia.order WHERE email='$username'"); 
+?>
+		<div class="Popular-Restaurants-content">
+				<div class="Popular-Restaurants-grids">
+				<div class="container">
+					<div class="Popular-Restaurants-grid wow fadeInRight" data-wow-delay="0.4s">
+						<table class="table table-bordered" style="font-size: 22px">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Email</th>
+					<th scope="col">Items</th>
+					<th scope="col">Price</th>
+					<th scope="col">Date</th>
+					<th scope="col">Status</th>
+				</tr>
+		</thead>
+		<tbody>
+			<?php
+			 if($results==false){ ?>
+			<tr>
+				<td><?php echo " " ?></td>
+				<td><?php echo " " ?></td>
+				<td><?php echo " " ?></td>
+				<td><?php echo " " ?></td>
+				<td><?php echo " " ?></td>
+			</tr>
+<?php
+			} else{ while ($row = mysqli_fetch_array($results)) { ?>
+			<tr>
+				<td><?php echo $row['email']; ?></td>
+				<td><?php echo $row['items']; ?></td>
+				<td><?php echo $row['price']; ?></td>
+				<td><?php echo $row['orderDate']; ?></td>
+				<td><?php echo $row['status']; ?></td>
+			</tr>
+			<?php }} ?>
+		</tbody>
+	</table>
+    
+							</div>
 				</div>
-				<div class="col-md-8 menu-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-					
-				</div>
-				<div class="clearfix"> </div>
-				<form action="addItem.php" method="post" enctype="multipart/form-data" class="">
-						<div class="form-group">
-							<label>Menu item name: </label>
-							<input type="text" name="name" class="form-control" /><br/>
-						</div>
-						<div class="form-group">
-							<label>Description: </label>
-							<textarea name="description" class="form-control"></textarea> <br/>
-						</div>
-						<div class="form-group">
-						<label>Price: </label>
-							<input type="text" name="price" class="form-control" /> <br/>
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" />
-						</div>
-						<input type="submit" value="submit" class="btn btn-primary form-control" /> 
-				</form>
-				
 			</div>
-			
-<!--footer-->
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	
+     <!--footer-->
 	<div class="footer">
 		<div class="container">
 			<div class="footer-head">
@@ -144,13 +195,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul class=" in">
 						<li><a href="index.html">Home</a></li>
 						<li><a  href="menu.html">Menu</a></li>
+						<li><a  href="blog.html">Blog</a></li>
 						<li><a  href="events.html">Events</a></li>
 						<li><a  href="contact.php">Contact</a></li>
 					</ul>					
+						
 				</div>
 				<div class="col-md-4 footer-bottom  animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
 					<h2>Follow Us</h2>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
+					
 					<ul class="social-ic">
 						<li><a href="#"><i></i></a></li>
 						<li><a href="#"><i class="ic"></i></a></li>
@@ -167,6 +221,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>		
 	<!--//footer-->
-
 </body>
 </html>

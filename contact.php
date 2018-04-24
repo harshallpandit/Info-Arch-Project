@@ -26,6 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 <link href="css/styles.css" rel="stylesheet">
+    <link href="css/stylecart.css" type="text/css" rel="stylesheet" />
 <!-- animation-effect -->
 <link href="css/animate.min.css" rel="stylesheet"> 
 <script src="js/wow.min.js"></script>
@@ -35,13 +36,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //animation-effect -->
 
 </head>
-<body>
-<div class="header head">
+<body><div class="header head">
 	<div class="container">
 		<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
 			<h1><a href="index.html"><img src="images/oo.png" alt=""><span>Amrit India</span><img src="images/oo.png" alt=""></a></h1>
 		</div>
-		<!--- Cart -->
 		<div class="header-right">
 						<div class="cart box_1">
 							<a href="checkout.php">
@@ -51,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="clearfix"> </div>
 						</div>
 					</div>
-		<div class="nav-icon">		
+				<div class="nav-icon">		
 			<a href="#" class="navicon"></a>
 				<div class="toggle">
 					<ul class="toggle-menu">
@@ -100,42 +99,73 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="clearfix"></div>
 	</div>
 	<!-- start search-->	
-		
 </div>
 <!--content-->
-	<div class="menu">
+	<div class="contact">
 		<div class="container">
-			<div class="menu-top">
+		<div class="menu-top">
 				<div class="col-md-4 menu-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-					<h3>Add Menu Item</h3>
+					<h3>Contact</h3>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
-					<span>Enter details below - </span>
+					<span></span>
 				</div>
 				<div class="col-md-8 menu-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-					
+					<p></p>
 				</div>
 				<div class="clearfix"> </div>
-				<form action="addItem.php" method="post" enctype="multipart/form-data" class="">
-						<div class="form-group">
-							<label>Menu item name: </label>
-							<input type="text" name="name" class="form-control" /><br/>
-						</div>
-						<div class="form-group">
-							<label>Description: </label>
-							<textarea name="description" class="form-control"></textarea> <br/>
-						</div>
-						<div class="form-group">
-						<label>Price: </label>
-							<input type="text" name="price" class="form-control" /> <br/>
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" />
-						</div>
-						<input type="submit" value="submit" class="btn btn-primary form-control" /> 
-				</form>
-				
 			</div>
+			<div class="contact-top">
+			<div class="col-md-5 contact-map">
+			<h5>Google Map</h5>
+			<div class="map animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37494223.23909492!2d103!3d55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x453c569a896724fb%3A0x1409fdf86611f613!2sRussia!5e0!3m2!1sen!2sin!4v1415776049771"></iframe>
+
+			</div>
+			<div class="address">
+					      <h4>Address</h4>
+					      <p>Amrit India Restaurant</p>
+						  <p>124 North Walnut StreetBloomington, IN 47404</p>
+						  <p>ph : (812) 650-3812</p>
+						  <p>Email : <a href="mailto:example@gmail.com">amritindia@gmail.com</a></p>
+					 </div>
+			</div>
+			<div class="col-md-7 contact-para animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
+			<h5>Contact Form</h5>
+			<form>
+				<div class="grid-contact">
+					<div class="col-md-6 contact-grid">
+						<p class="your-para">Name </p>
+							<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+						</div>
+					<div class="col-md-6 contact-grid">
+					<p class="your-para">Phone number</p>	
+						<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="grid-contact">
+					<div class="col-md-6 contact-grid">
+						<p class="your-para">Email</p>
+						<input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+					</div>
+					<div class="col-md-6 contact-grid">
+						<p class="your-para">Password</p>
+						<input type="Password" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<p class="your-para msg-para">MESSAGE</p>
+				<textarea cols="77" rows="6" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+					<div class="send">
+						<input type="submit" value="Send " >
+					</div>
+			</form>
+			</div>	
 			
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	</div>
 <!--footer-->
 	<div class="footer">
 		<div class="container">
@@ -144,13 +174,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul class=" in">
 						<li><a href="index.html">Home</a></li>
 						<li><a  href="menu.html">Menu</a></li>
+						<li><a  href="blog.html">Blog</a></li>
 						<li><a  href="events.html">Events</a></li>
 						<li><a  href="contact.php">Contact</a></li>
 					</ul>					
+						
 				</div>
 				<div class="col-md-4 footer-bottom  animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
 					<h2>Follow Us</h2>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
+					
 					<ul class="social-ic">
 						<li><a href="#"><i></i></a></li>
 						<li><a href="#"><i class="ic"></i></a></li>
@@ -170,3 +203,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </body>
 </html>
+

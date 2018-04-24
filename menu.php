@@ -38,10 +38,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
+
 <div class="header head">
 	<div class="container">
 		<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
-			<h1><a href="index.html"><span>C</span><img src="images/oo.png" alt=""><img src="images/oo.png" alt="">kery</a></h1>
+			<h1><a href="index.html"><img src="images/oo.png" alt=""><span>Amrit India</span><img src="images/oo.png" alt=""></a></h1>
 		</div>
 		<div class="header-right">
 						<div class="cart box_1">
@@ -52,16 +53,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="clearfix"> </div>
 						</div>
 					</div>
-		<div class="nav-icon">		
+				<div class="nav-icon">		
 			<a href="#" class="navicon"></a>
 				<div class="toggle">
 					<ul class="toggle-menu">
-						<li><a  href="index.html">Home</a></li>
-						<li><a class="active" href="menu.html">Menu</a></li>
-						<li><a  href="blog.html">Blog</a></li>
-						<li><a  href="typo.html">Codes</a></li>
-						<li><a  href="events.html">Events</a></li>
-						<li><a  href="contact.html">Contact</a></li>
+						<li><a class="active" href="index.php">Home</a></li>
+                        
+                        <?php 
+                        if (!isset($_SESSION['username'])) { ?>
+<!--                        //no one logged in-->
+                <li><a  href="userDash.php">Login</a></li>    
+                <li><a  href="menu.php">Order</a></li>
+                <li><a  href="menu.php">Menu</a></li>         
+                <li><a  href="contact.php">Contact</a></li>
+                        
+                         <?php } else{  
+                        $email =  $_SESSION['username'];
+
+                            $query = "SELECT userType FROM user WHERE email='$email'"; 
+        $db = mysqli_connect('localhost', 'root', 'root', 'AmritIndia');
+        $results = mysqli_query($db, $query);
+        $row = mysqli_fetch_array($results, MYSQLI_NUM);
+                           // echo $row[0];
+                          if($row[0] == "admin"){  
+                        ?>
+  <li><a  href="order.php">Admin Dashboard</a></li>                     
+ <li><a href="userDash.php?logout='1'" >Logout</a></li>    
+						<li><a  href="menu.php">Menu View</a></li>
+       <li><a  href="editMenu.php"> Edit Menu</a></li>       
+                <li><a  href="contact.php">Contact</a></li>     
+                         <?php } else{?>
+  <li><a  href="userDash.php">User Dashboard</a></li>                     
+ <li><a href="userDash.php?logout='1'" >Logout</a></li>
+                        <li><a  href="menu.php">Order</a></li><li><a  href="menu.php">Menu </a></li>
+                <li><a  href="contact.php">Contact</a></li> 
+                         <?php }} ?>
+						
 					</ul>
 				</div>
 			<script>
@@ -97,7 +124,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				$servername = "localhost";
 				$username = "root";
 				$password = "root";
-				$dbname = "amritindia";
+				$dbname = "AmritIndia";
 
 				$conn = new mysqli($servername, $username, $password, $dbname);
 				if ($conn->connect_error) {
@@ -166,76 +193,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								$conn->close();
 						
 				?>
-			<div class="menu-bottom animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me3.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me4.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me5.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="clearfix"> </div>				
-			</div>
-			<div class="menu-bottom animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me6.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me7.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me8.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
+			
 				<div class="clearfix"> </div>				
 			</div>
 		</div>
@@ -250,7 +208,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a  href="menu.html">Menu</a></li>
 						<li><a  href="blog.html">Blog</a></li>
 						<li><a  href="events.html">Events</a></li>
-						<li><a  href="contact.html">Contact</a></li>
+						<li><a  href="contact.php">Contact</a></li>
 					</ul>					
 						<span>There are many variations of passages</span>
 				</div>

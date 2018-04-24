@@ -1,16 +1,15 @@
-<!--A Design by W3layouts 
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<?php
-	session_start();?>
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Amrit India Menu</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+ 
+  
+<title> Amrit India</title>
+
+  <link rel="stylesheet" type="text/css" href="/css/loginstyle.css">
+    <link href="css/loginstyle.css" rel="stylesheet">
+
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
@@ -33,29 +32,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  new WOW().init();
 </script>
 <!-- //animation-effect -->
-
+    
+    
+  
 </head>
 <body>
-<div class="header head">
+    <div class="header head">
 	<div class="container">
-		<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
+			<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
 			<h1><a href="index.html"><img src="images/oo.png" alt=""><span>Amrit India</span><img src="images/oo.png" alt=""></a></h1>
 		</div>
-		<!--- Cart -->
+        <!-------- Cart -->
 		<div class="header-right">
-						<div class="cart box_1">
-							<a href="checkout.php">
-								<h3> <span class="simpleCart_total"> <?php echo $_SESSION['price'] ?> </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?php echo count($_SESSION['items']) ?> </span> items)<img src="images/bag.png" width="25" height="25" alt=""></h3>
-							</a>	
-							<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
-							<div class="clearfix"> </div>
-						</div>
-					</div>
-		<div class="nav-icon">		
-			<a href="#" class="navicon"></a>
-				<div class="toggle">
-					<ul class="toggle-menu">
-						<li><a class="active" href="index.php">Home</a></li>
+			<div class="cart box_1">
+				<a href="checkout.php">
+					<h3> <span class="simpleCart_total"> <?php echo $_SESSION['price'] ?> </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?php echo count($_SESSION['items']) ?> </span> items)<img src="images/bag.png" width="25" height="25" alt=""></h3>
+				</a>	
+				<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!------------>
+		<div class="nav-icon">    
+      <a href="#" class="navicon"></a>
+        <div class="toggle">
+          <ul class="toggle-menu">
+            <li><a class="active" href="index.php">Home</a></li>
                         
                         <?php 
                         if (!isset($_SESSION['username'])) { ?>
@@ -77,7 +79,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         ?>
   <li><a  href="order.php">Admin Dashboard</a></li>                     
  <li><a href="userDash.php?logout='1'" >Logout</a></li>    
-						<li><a  href="menu.php">Menu View</a></li>
+            <li><a  href="menu.php">Menu View</a></li>
        <li><a  href="editMenu.php"> Edit Menu</a></li>       
                 <li><a  href="contact.php">Contact</a></li>     
                          <?php } else{?>
@@ -86,57 +88,69 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><a  href="menu.php">Order</a></li><li><a  href="menu.php">Menu </a></li>
                 <li><a  href="contact.php">Contact</a></li> 
                          <?php }} ?>
-						
-					</ul>
-				</div>
-			<script>
-			$('.navicon').on('click', function (e) {
-			  e.preventDefault();
-			  $(this).toggleClass('navicon--active');
-			  $('.toggle').toggleClass('toggle--active');
-			});
-			</script>
-		</div>
+            
+          </ul>
+        </div>
+      <script>
+      $('.navicon').on('click', function (e) {
+        e.preventDefault();
+        $(this).toggleClass('navicon--active');
+        $('.toggle').toggleClass('toggle--active');
+      });
+      </script>
+    </div>
 	<div class="clearfix"></div>
 	</div>
 	<!-- start search-->	
 		
 </div>
-<!--content-->
-	<div class="menu">
-		<div class="container">
-			<div class="menu-top">
-				<div class="col-md-4 menu-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-					<h3>Add Menu Item</h3>
-					<label><i class="glyphicon glyphicon-menu-up"></i></label>
-					<span>Enter details below - </span>
-				</div>
-				<div class="col-md-8 menu-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-					
-				</div>
-				<div class="clearfix"> </div>
-				<form action="addItem.php" method="post" enctype="multipart/form-data" class="">
-						<div class="form-group">
-							<label>Menu item name: </label>
-							<input type="text" name="name" class="form-control" /><br/>
-						</div>
-						<div class="form-group">
-							<label>Description: </label>
-							<textarea name="description" class="form-control"></textarea> <br/>
-						</div>
-						<div class="form-group">
-						<label>Price: </label>
-							<input type="text" name="price" class="form-control" /> <br/>
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" />
-						</div>
-						<input type="submit" value="submit" class="btn btn-primary form-control" /> 
-				</form>
-				
-			</div>
-			
-<!--footer-->
+   <div class="intro">
+       <div class="header-login">
+  	<h2>Register</h2>
+  </div>
+	
+  <form method="post" action="register.php">
+  	<?php include('errors.php'); ?>
+      
+      <div class="input-group">
+  	  <label></label>
+  	  <input type="email" name="email" placeholder="Email" value="<?php echo $email; ?>">
+  	</div>
+      	<div class="input-group" >
+  	  <label></label>
+  	  <input type="text" name="fname"  placeholder="First Name" >
+  	</div>
+      	<div class="input-group"  >
+  	  <label></label>
+  	  <input type="text" name="lname"  placeholder="Last Name"
+            >
+  	</div>
+      <div class="input-group"  >
+  	  <label></label>
+  	  <input type="text" name="address"  placeholder="Enter Address"
+             >
+  	</div>
+      <div class="input-group"  >
+  	  <label></label>
+  	  <input type="text" name="city"  placeholder="Enter City"
+            >
+  	</div>
+      
+  	
+  	<div class="input-group">
+  	  <input type="password" name="password_1" placeholder="Password">
+  	</div>
+  	<div class="input-group">
+  	  <label></label>
+  	  <input type="password" name="password_2" placeholder="Confirm password">
+  	</div>
+  	<div class="input-group">
+  	  <button type="submit" class="btn" name="reg_user">Register</button>
+  	</div>
+  	<p>
+  		Already a member? <a href="login.php">Sign in</a>
+  	</p>
+  </form></div> <!--footer-->
 	<div class="footer">
 		<div class="container">
 			<div class="footer-head">
@@ -151,6 +165,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-4 footer-bottom  animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
 					<h2>Follow Us</h2>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
+					<p></p>
 					<ul class="social-ic">
 						<li><a href="#"><i></i></a></li>
 						<li><a href="#"><i class="ic"></i></a></li>
@@ -167,6 +182,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>		
 	<!--//footer-->
-
 </body>
 </html>

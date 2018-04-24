@@ -1,0 +1,8 @@
+delete from cart
+
+after order place; initialise cart;
+
+contact
+change cookery
+change session start
+check page nav icon

@@ -69,160 +69,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 			<div class="menu-top">
 				<div class="col-md-4 menu-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-					<h3>Menu</h3>
+					<h3>Add Menu Item</h3>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
-					<span>
-						
-					</span>
+					<span>Enter details below - </span>
 				</div>
 				<div class="col-md-8 menu-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
 					
 				</div>
 				<div class="clearfix"> </div>
-
-			</div>
-			<?php
-				$servername = "localhost";
-				$username = "root";
-				$password = "root";
-				$dbname = "amritindia";
-
-				$conn = new mysqli($servername, $username, $password, $dbname);
-				if ($conn->connect_error) {
-				    die("Connection failed: " . $conn->connect_error);
-				} 
-
-				$sql = "SELECT id, name, description, price FROM menu";
-				$result = $conn->query($sql);
-
-				if ($result->num_rows > 0) {
-			    // output data of each row
-			    	while($row = $result->fetch_assoc()) {
-			 ?>
-			<div class="Popular-Restaurants-content">
-				<div class="Popular-Restaurants-grids">
-				<div class="container">
-					<div class="Popular-Restaurants-grid wow fadeInRight" data-wow-delay="0.4s">
-						<div class="col-md-3 restaurent-logo">
-							<img src="getImage.php?id=<?php echo $row["id"];?>" alt="" width="250" height="250" />
-						</div>
-						<div class="col-md-2 restaurent-title">
-							<div class="logo-title">
-								<h4><a href="#"><?php echo $row["name"];?></a>
-								</h4>
-							</div>
-							<div class="rating">
-								<span><?php echo $row["description"];?></span>
-							</div>
-						</div>
-						<div class="col-md-7 buy">
-							<span>$<?php echo $row["price"]?></span>
-							<a class="morebtn hvr-rectangle-in" href="orders-list.html">buy</a>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-			<!--div class="menu-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="getImage.php?id=<?php echo $row["id"];?>" alt="" width="100" height="300" >
-							<div class="captn">
-								<h4><?php echo $row["name"]?></h4>
-								<p>$<?php echo $row["price"]?></p>
-								<p><?php echo $row["description"]?></p>
-							</div>
-						</a>	
-											
-					</div>
-				</div-->
+				<form action="addItem.php" method="post" enctype="multipart/form-data">
+						Menu item name: <input type="text" name="name" /><br/>
+						Description: <textarea name="description"></textarea> <br/>
+						Price: <input type="text" name="price" /> <br/>
+						<input type="file" name="image" />
+						<input type="submit" value="submit" /> 
+				</form>
 				
-								
 			</div>
-			<?php
-								}
-							} else {
-			    				echo "0 results";
-								}
-								$conn->close();
-						
-				?>
-			<div class="menu-bottom animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me3.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me4.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me5.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="clearfix"> </div>				
-			</div>
-			<div class="menu-bottom animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me6.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me7.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me8.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="clearfix"> </div>				
-			</div>
-		</div>
-	</div>
+			
 <!--footer-->
 	<div class="footer">
 		<div class="container">

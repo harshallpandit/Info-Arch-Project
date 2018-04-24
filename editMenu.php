@@ -58,12 +58,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  $('.toggle').toggleClass('toggle--active');
 			});
 			</script>
+			<script type="text/javascript">
+				
+				var g;
+				function edit(id) {
+				   var modal = document.getElementById('myModal' + id);
+				   modal.style.display = "block";
+				   g = id;
+				}
+
+				function closeModal(id) {
+					var modal = document.getElementById('myModal' + id);
+					modal.style.display = "none";
+					g = id;
+				}
+
+				window.onclick = function(event) {
+				    var modal = document.getElementById('myModal' + g);
+				    if (event.target == modal) {
+				        modal.style.display = "none";
+				    }
+				}
+			</script>
 		</div>
 	<div class="clearfix"></div>
 	</div>
 	<!-- start search-->	
 		
 </div>
+
 <!--content-->
 	<div class="menu">
 		<div class="container">
@@ -71,12 +94,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-4 menu-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
 					<h3>Menu</h3>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
-					<span>There are many variations</span>
+					<span>
+						<a href="addMenuItem.php">Add Menu Item</a>
+						<a href="editMenu.php">Edit Menu</a>
+					</span>
 				</div>
 				<div class="col-md-8 menu-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour , or randomised words which don't look even slightly believable.There are many variations by injected humour. There are many variations of passages of Lorem Ipsum available.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form by injected humour , or randomised words</p>
+					
+					
 				</div>
-				<a href="">Add Item</a>
+				
 				<div class="clearfix"> </div>
 			</div>
 			<?php
@@ -97,6 +124,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			    // output data of each row
 			    	while($row = $result->fetch_assoc()) {
 			 ?>
+			 <div id="myModal<?php echo $row["id"]?>" class="modal">
+  				<div class="modal-content">
+    				<button id="close" onclick="closeModal(<?php echo $row["id"]?>)" class="close" value="button">&times;</button>
+    				<form action="updateMenu.php" method="post" enctype="multipart/form-data">
+						Name: <input type="text" name="name" value="<?php echo $row["name"]?>" /><br/><br/>
+						Description: <textarea name="description" value=""><?php echo $row["description"]?></textarea><br/><br/>
+						Price: <input type="text" name="price" value="<?php echo $row["price"]?>" /><br/><br/>
+						<input type="file" name="image"/><br/><br/>
+						<input type="hidden" name="id" value="<?php echo $row["id"]?>">
+						<input type="submit" name="submit" value="submit"/>
+					</form>
+  				</div>
+			</div>
 			<div class="Popular-Restaurants-content">
 				<div class="Popular-Restaurants-grids">
 				<div class="container">
@@ -115,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="col-md-7 buy">
 							<span>$<?php echo $row["price"]?></span>
-							<a class="morebtn hvr-rectangle-in" href="orders-list.html">buy</a>
+							<button class="morebtn hvr-rectangle-in" id="<?php echo $row["id"]?>" onclick="edit(<?php echo $row["id"]?>)">edit</a>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -144,86 +184,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							} else {
 			    				echo "0 results";
 								}
-
-						$sql = "insert into menu(name, description, price) values('Gajar ka Halwa','Gajar ka Halwa is a carrot-based sweet dessert pudding from the Indian subcontinent.	It is one of the most popular Indian dessert. It is a delight during winter months.', 3);";
-						$conn->query($sql);
-								$conn->close();
+						$conn->close();
 						
 				?>
-			<div class="menu-bottom animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me3.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me4.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me5.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="clearfix"> </div>				
-			</div>
-			<div class="menu-bottom animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me6.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me7.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me8.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="clearfix"> </div>				
-			</div>
-		</div>
-	</div>
+			
 <!--footer-->
 	<div class="footer">
 		<div class="container">

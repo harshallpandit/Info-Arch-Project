@@ -24,8 +24,6 @@
 			if(!$conn->query($sql)){
 				echo "Failed";
 			}
-			
-		
 		}
 		else {
 			$sql = "update menu set name='$name', description='$description', price=$price where id=$id";	

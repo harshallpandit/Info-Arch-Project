@@ -96,7 +96,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
 					<span>
 						<a href="addMenuItem.php">Add Menu Item</a>
-						<a href="editMenu.php">Edit Menu</a>
 					</span>
 				</div>
 				<div class="col-md-8 menu-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">

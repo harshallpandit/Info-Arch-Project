@@ -1,11 +1,5 @@
 <?php
 	session_start();
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$itemNum = $_POST["code"];
-		$price = $_POST["price"];
-		array_push($_SESSION['items'], $itemNum);
-    	$_SESSION['price'] = $_SESSION['price'] + $price; 
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,14 +38,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h1><a href="index.html"><span>C</span><img src="images/oo.png" alt=""><img src="images/oo.png" alt="">kery</a></h1>
 		</div>
 		<div class="header-right">
-						<div class="cart box_1">
-							<a href="checkout.php">
-								<h3> <span class="simpleCart_total"> <?php echo $_SESSION['price'] ?> </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?php echo count($_SESSION['items']) ?> </span> items)<img src="images/bag.png" width="25" height="25" alt=""></h3>
-							</a>	
-							<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
-							<div class="clearfix"> </div>
-						</div>
-					</div>
+			<div class="cart box_1">
+				<a href="checkout.php">
+					<h3> <span class="simpleCart_total"> <?php echo $_SESSION['price'] ?> </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?php echo count($_SESSION['items']) ?> </span> items)<img src="images/bag.png" width="25" height="25" alt=""></h3>
+				</a>	
+				<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
 		<div class="nav-icon">		
 			<a href="#" class="navicon"></a>
 				<div class="toggle">
@@ -81,10 +75,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 			<div class="menu-top">
 				<div class="col-md-4 menu-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-					<h3>Menu</h3>
+					<h3>Cart</h3>
 					<label><i class="glyphicon glyphicon-menu-up"></i></label>
 					<span>
-						
+						Number of Items: <?php echo count($_SESSION['items']) ?> &emsp; 
+						Total: $<?php echo $_SESSION['price']?> &emsp;
+						<form action="confirmOrder.php" method="post">
+							<input type="submit" class="btn btn-primary" value="Place Order">
+						</form>
 					</span>
 				</div>
 				<div class="col-md-8 menu-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
@@ -93,6 +91,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"> </div>
 
 			</div>
+
 			<?php
 				$servername = "localhost";
 				$username = "root";
@@ -104,142 +103,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				    die("Connection failed: " . $conn->connect_error);
 				} 
 
-				$sql = "SELECT id, name, description, price FROM menu";
-				$result = $conn->query($sql);
+				foreach($_SESSION['items'] as $item) {
+					$sql = "SELECT id, name, description, price FROM menu where id=$item";
+					$result = $conn->query($sql);
 
-				if ($result->num_rows > 0) {
-			    // output data of each row
-			    	while($row = $result->fetch_assoc()) {
+					if ($result->num_rows > 0) {
+			    	// output data of each row
+			    		while($row = $result->fetch_assoc()) {
 			 ?>
 			<div class="Popular-Restaurants-content">
 				<div class="Popular-Restaurants-grids">
-				<div class="container">
-					<div class="Popular-Restaurants-grid wow fadeInRight" data-wow-delay="0.4s">
-						<form method="post" action="menu.php">
-						<div class="col-md-3 restaurent-logo">
-							<img src="getImage.php?id=<?php echo $row["id"];?>" alt="" width="250" height="250" />
-						</div>
-						<div class="col-md-2 restaurent-title">
-							<div class="logo-title">
-								<h4><a href="#"><?php echo $row["name"];?></a>
-								</h4>
+					<div class="container">
+						<div class="Popular-Restaurants-grid wow fadeInRight" data-wow-delay="0.4s">
+							<form method="post" action="menu.php">
+							<div class="col-md-3 restaurent-logo">
+								<img src="getImage.php?id=<?php echo $row['id'];?>" alt="" width="100" height="100" />
 							</div>
-							<div class="rating">
-								<span><?php echo $row["description"];?></span>
+							<div class="col-md-2 restaurent-title">
+								<div class="logo-title">
+									<h4><a href="#"><?php echo $row["name"];?></a>
+									</h4>
+								</div>
+								<div class="rating">
+									<span>x1</span>
+								</div>
 							</div>
-						</div>
-						<input type="hidden" name="action" value="add" />
-						<input type="hidden" name="price" value="<?php echo $row["price"]?>" />
-						<input type="hidden" name="code" value="<?php echo $row["id"] ?>" />
-						<div class="col-md-7 buy">
-							<span>$<?php echo $row["price"]?></span>
-							<input type="submit" value="Add to cart" class="btn btn-primary" />
-						</div>
-						<div class="clearfix"></div>
-						</form>
+							<input type="hidden" name="action" value="add" />
+							<input type="hidden" name="price" value="<?php echo $row["price"]?>" />
+							<input type="hidden" name="code" value="<?php echo $row['id'] ?>" />
+							<div class="col-md-7 buy">
+								<span>$<?php echo $row["price"]?></span>
+								<input type="submit" value="Delete" class="btn btn-primary" />
 							</div>
+							<div class="clearfix"></div>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-			<!--div class="menu-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="getImage.php?id=<?php echo $row["id"];?>" alt="" width="100" height="300" >
-							<div class="captn">
-								<h4><?php echo $row["name"]?></h4>
-								<p>$<?php echo $row["price"]?></p>
-								<p><?php echo $row["description"]?></p>
-							</div>
-						</a>	
-											
-					</div>
-				</div-->
-				
-								
-			</div>
-			<?php
-								}
-							} else {
-			    				echo "0 results";
-								}
-								$conn->close();
+		<?php
+								}}
+							} 	$conn->close();
 						
 				?>
-			<div class="menu-bottom animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me3.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me4.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me5.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="clearfix"> </div>				
-			</div>
-			<div class="menu-bottom animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me6.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me7.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>		
-					</div>
-				</div>
-				<div class="col-md-4 menu-bottom1">
-					<div class="btm-right">
-						<a href="events.html">
-							<img src="images/me8.jpg" alt="" class="img-responsive">
-							<div class="captn">
-								<h4>Lorem</h4>
-								<p>$20.00</p>				
-							</div>
-						</a>	
-					</div>
-				</div>
-				<div class="clearfix"> </div>				
-			</div>
-		</div>
+			
+	</div>
 
+
+		</div>
+	
 <!--footer-->
 	<div class="footer">
 		<div class="container">

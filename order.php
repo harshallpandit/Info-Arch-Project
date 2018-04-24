@@ -1,15 +1,16 @@
 <?php 
-include('editOrder.php');
+include('odredit.php');
 	if (isset($_GET['edit'])) {
 		$id = $_GET['edit'];
 		$update = true;
-		$record = mysqli_query($db, "SELECT * FROM order WHERE id=4");
+		echo $id;
+		$record = mysqli_query($db, "SELECT * FROM amritindia.order WHERE orderID=$id");
 		if (count($record) == 1 ) {
 			$n = mysqli_fetch_array($record);
-			$mail = $n['mail'];
+			$mail = $n['email'];
 			$items = $n['items'];
 			$price = (int)$n['price'];
-			$date = $n['date'];
+			$date = $n['orderDate'];
 			$status = $n['status'];
 		}
 	}
@@ -19,6 +20,7 @@ include('editOrder.php');
 <head>
 	<title>Order History</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 	<?php if (isset($_SESSION['message'])): ?>
@@ -29,7 +31,9 @@ include('editOrder.php');
 			?>
 		</div>
 	<?php endif ?>
-<?php $results = mysqli_query($db, "SELECT * FROM order"); ?>
+<?php 
+	$results = mysqli_query($db, "SELECT * FROM amritindia.order"); 
+?>
 	
 
 <table class="table table-hover">
@@ -46,22 +50,22 @@ include('editOrder.php');
 	<tbody>
 	<?php while ($row = mysqli_fetch_array($results)) { ?>
 		<tr>
-			<td><?php echo $row['mail']; ?></td>
+			<td><?php echo $row['email']; ?></td>
 			<td><?php echo $row['items']; ?></td>
 			<td><?php echo $row['price']; ?></td>
-			<td><?php echo $row['date']; ?></td>
+			<td><?php echo $row['orderDate']; ?></td>
 			<td><?php echo $row['status']; ?></td>
 			<td>
-				<a href="order.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
+				<a href="order.php?edit=<?php echo $row['orderID']; ?>" class="edit_btn" >Edit</a>
 			</td>
 			<td>
-				<a href="editOrder.php?del=<?php echo $row['id']; ?>" class="del_btn">Delete</a>
+				<a href="odredit.php?del=<?php echo $row['orderID']; ?>" class="del_btn">Delete</a>
 			</td>
 		</tr>
 	<?php } ?>
 		</tbody>
 </table>
-<form method="post" action="editOrder.php" >
+<form method="post" action="odredit.php" >
 	<input type="hidden" name="id" value="<?php echo $id; ?>">
 	<div class="input-group">
 		<label>Mail</label>

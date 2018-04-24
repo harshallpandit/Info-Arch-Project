@@ -16,7 +16,7 @@
 		$price = (int)$_POST['price'];
 		$date = $_POST['date'];
 		$status = $_POST['status'];
-		mysqli_query($db, "INSERT INTO order (mail, items, price, date, status) VALUES ('$mail','$items', '$price', '$date', '$status')");
+		mysqli_query($db, "INSERT INTO amritindia.order (email, items, price, orderDate, status) VALUES ('$mail','$items', '$price', '$date', '$status')");
 		$_SESSION['message'] = "Order added!";
 		header('location: order.php');
 	}
@@ -28,18 +28,18 @@
 		$price = (int)$_POST['price'];
 		$date = $_POST['date'];
 		$status = $_POST['status'];
-		mysqli_query($db, "UPDATE order SET mail='$mail', items='$items', price='$price', date='$date', status='$status' WHERE id=$id");
+		mysqli_query($db, "UPDATE amritindia.order SET email='$mail', items='$items', price='$price', orderDate='$date', status='$status' WHERE orderID=$id");
 		$_SESSION['message'] = "Order updated!";
 		header('location: order.php');
 	}
 
 if (isset($_GET['del'])) {
 	$id = $_GET['del'];
-	mysqli_query($db, "DELETE FROM order WHERE id=$id");
+	mysqli_query($db, "DELETE FROM amritindia.order WHERE orderID=$id");
 	$_SESSION['message'] = "Order deleted!"; 
 	header('location: order.php');
 }
 
-	$results = mysqli_query($db, "SELECT * FROM order");
+	$results = mysqli_query($db, "SELECT * FROM amritindia.order");
 
 ?>

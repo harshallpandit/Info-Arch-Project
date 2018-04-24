@@ -5,15 +5,20 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
-if(!empty($_POST["action"])) {
-switch($_POST["action"]) {
+session_start();
+if(!empty($_GET["action"])) {
+	echo "dasdas";
+switch($_GET["action"]) {
 	case "add":
-	//if(!empty($_POST["quantity"])) {
-			$code = $_POST["code"];
-			$db = "amritindia";
-			$productByCode = mysqli_query($db, "SELECT * FROM menu WHERE id='$code'");
+	echo "hellowdasdas";
+	if(!empty($_POST["quantity"])) {
+		echo "hello!!!!";
+			$code = $_GET['code'];
+			$productByCode = mysqli_query($db, "SELECT * FROM menu WHERE id=$code");
 			$itemArray = array(
                 $productByCode[0]["id"]=>array('name'=>$productByCode[0]["name"], 'id'=>$productByCode[0]["id"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
+			echo $itemArray[0]["id"];
+			echo "hello";
 			if(!empty($_SESSION["cart_item"])) {
 				if(in_array($productByCode[0]["id"],array_keys($_SESSION["cart_item"]))) {
 					foreach($_SESSION["cart_item"] as $k => $v) {
@@ -27,9 +32,9 @@ switch($_POST["action"]) {
 				} else {
 					$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
 				}
-	//		} else {
-	//			$_SESSION["cart_item"] = $itemArray;
-	//		}
+			} else {
+				$_SESSION["cart_item"] = $itemArray;
+			}
 		}
 
 break;
@@ -188,7 +193,7 @@ if(isset($_SESSION["cart_item"])){
 				<div class="Popular-Restaurants-grids">
 				<div class="container">
 					<div class="Popular-Restaurants-grid wow fadeInRight" data-wow-delay="0.4s">
-						<form method="post" action="menu.php">
+						<form method="post" action="menu.php?action=add&code=<?php echo $row["id"] ?>">
 						<div class="col-md-3 restaurent-logo">
 							<img src="getImage.php?id=<?php echo $row["id"];?>" alt="" width="250" height="250" />
 						</div>
@@ -201,8 +206,6 @@ if(isset($_SESSION["cart_item"])){
 								<span><?php echo $row["description"];?></span>
 							</div>
 						</div>
-						<input type="hidden" name="action" value="add" />
-						<input type="hidden" name="code" value="<?php echo $row["id"] ?>" />
 						<div class="col-md-7 buy">
 							<span>$<?php echo $row["price"]?></span>
 							<input type="submit" value="Add to cart" class="btnAddAction" />

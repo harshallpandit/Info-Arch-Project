@@ -4,51 +4,6 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<?php
-if(!empty($_POST["action"])) {
-switch($_POST["action"]) {
-	case "add":
-	//if(!empty($_POST["quantity"])) {
-			$code = $_POST["code"];
-			$db = "amritindia";
-			$productByCode = mysqli_query($db, "SELECT * FROM menu WHERE id='$code'");
-			$itemArray = array(
-                $productByCode[0]["id"]=>array('name'=>$productByCode[0]["name"], 'id'=>$productByCode[0]["id"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
-			if(!empty($_SESSION["cart_item"])) {
-				if(in_array($productByCode[0]["id"],array_keys($_SESSION["cart_item"]))) {
-					foreach($_SESSION["cart_item"] as $k => $v) {
-							if($productByCode[0]["id"] == $k) {
-								if(empty($_SESSION["cart_item"][$k]["quantity"])) {
-									$_SESSION["cart_item"][$k]["quantity"] = 0;
-								}
-								$_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
-							}
-					}
-				} else {
-					$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
-				}
-	//		} else {
-	//			$_SESSION["cart_item"] = $itemArray;
-	//		}
-		}
-
-break;
-	case "remove":
-		if(!empty($_SESSION["cart_item"])) {
-			foreach($_SESSION["cart_item"] as $k => $v) {
-					if($_GET["code"] == $k)
-						unset($_SESSION["cart_item"][$k]);				
-					if(empty($_SESSION["cart_item"]))
-						unset($_SESSION["cart_item"]);
-			}
-		}
-	break;
-	case "empty":
-		unset($_SESSION["cart_item"]);
-	break;	
-}}
-//echo $_SESSION["cart_item"];
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +24,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 <link href="css/styles.css" rel="stylesheet">
-    <link href="css/stylecart.css" type="text/css" rel="stylesheet" />
 <!-- animation-effect -->
 <link href="css/animate.min.css" rel="stylesheet"> 
 <script src="js/wow.min.js"></script>
@@ -110,45 +64,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- start search-->	
 		
 </div>
-    <div id="shopping-cart">
-<div class="txt-heading">Shopping Cart <a id="btnEmpty" href="menu.php?action=empty">Empty Cart</a></div>
-<?php
-if(isset($_SESSION["cart_item"])){
-    $item_total = 0;
-?>	
-<table cellpadding="10" cellspacing="1">
-<tbody>
-<tr>
-<th style="text-align:left;"><strong>Name</strong></th>
-<th style="text-align:left;"><strong>Code</strong></th>
-<th style="text-align:right;"><strong>Quantity</strong></th>
-<th style="text-align:right;"><strong>Price</strong></th>
-<th style="text-align:center;"><strong>Action</strong></th>
-</tr>	
-<?php		
-    foreach ($_SESSION["cart_item"] as $item){
-		?>
-				<tr>
-				<td style="text-align:left;border-bottom:#F0F0F0 1px solid;"><strong><?php echo $item["name"]; ?></strong></td>
-				<td style="text-align:left;border-bottom:#F0F0F0 1px solid;"><?php echo $item["code"]; ?></td>
-				<td style="text-align:right;border-bottom:#F0F0F0 1px solid;"><?php echo $item["quantity"]; ?></td>
-				<td style="text-align:right;border-bottom:#F0F0F0 1px solid;"><?php echo "$".$item["price"]; ?></td>
-				<td style="text-align:center;border-bottom:#F0F0F0 1px solid;"><a href="menu.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">Remove Item</a></td>
-				</tr>
-				<?php
-        $item_total += ($item["price"]*$item["quantity"]);
-		}
-		?>
-
-<tr>
-<td colspan="5" align=right><strong>Total:</strong> <?php echo "$".$item_total; ?></td>
-</tr>
-</tbody>
-</table>		
-  <?php
-}
-?>
-</div>
 <!--content-->
 	<div class="menu">
 		<div class="container">
@@ -188,7 +103,6 @@ if(isset($_SESSION["cart_item"])){
 				<div class="Popular-Restaurants-grids">
 				<div class="container">
 					<div class="Popular-Restaurants-grid wow fadeInRight" data-wow-delay="0.4s">
-						<form method="post" action="menu.php">
 						<div class="col-md-3 restaurent-logo">
 							<img src="getImage.php?id=<?php echo $row["id"];?>" alt="" width="250" height="250" />
 						</div>
@@ -201,15 +115,12 @@ if(isset($_SESSION["cart_item"])){
 								<span><?php echo $row["description"];?></span>
 							</div>
 						</div>
-						<input type="hidden" name="action" value="add" />
-						<input type="hidden" name="code" value="<?php echo $row["id"] ?>" />
 						<div class="col-md-7 buy">
 							<span>$<?php echo $row["price"]?></span>
-							<input type="submit" value="Add to cart" class="btnAddAction" />
+							<a class="morebtn hvr-rectangle-in" href="orders-list.html">buy</a>
 						</div>
 						<div class="clearfix"></div>
-						</form>
-							</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -311,7 +222,7 @@ if(isset($_SESSION["cart_item"])){
 				<div class="clearfix"> </div>				
 			</div>
 		</div>
-
+	</div>
 <!--footer-->
 	<div class="footer">
 		<div class="container">

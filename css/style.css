@@ -94,6 +94,48 @@ a.simpleCart_empty {
   letter-spacing: 2px;
 }
 
+.popular-restaurents{
+  padding:4em 0;
+  background: #fff;
+}
+.Popular-Restaurants-content{
+  padding:3em 0;
+}
+.Popular-Restaurants-grid {
+  padding-bottom: 2em;
+  border-bottom: 1px solid #D7D7D7;
+  margin-bottom: 2em;
+}
+.rating span{
+  display:block;
+  font-size:1.23em;
+  font-weight:600;
+  margin-left:5px;
+}
+.logo-title{
+  border-bottom:1px dotted #000000;
+  width: 63%; 
+  margin-bottom: 0.8em;
+}
+.buy{
+  text-align:right;
+  margin-top: 0.8em;
+}
+.restaurent-title a {
+    color: #000000;
+    text-decoration: none;
+  }
+.restaurent-title a:hover{
+  color:#5BBD50;
+}
+.buy span{
+  color:#515151;
+  font-size:2em;
+  font-weight:600;
+  display: block;
+  margin: 0 0.9em 0.3em 0;
+  font-family: 'Lobster Two', cursive;
+}
 
 
 

@@ -9,7 +9,7 @@ include('odredit.php');
 			$n = mysqli_fetch_array($record);
 			$mail = $n['email'];
 			$items = $n['items'];
-			$price = (int)$n['price'];
+			$price = $n['price'];
 			$date = $n['orderDate'];
 			$status = $n['status'];
 		}
@@ -173,10 +173,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="form-group">
 		<label>Price</label>
 		<input type="text" name="price" class="form-control" value="<?php echo $price; ?>">
-	</div>
-	<div class="form-group">
-		<label>Date</label>
-		<input type="date" name="date" class="form-control" value="<?php echo $date; ?>">
 	</div>
 	<div class="form-group">
 		<label>Status</label>

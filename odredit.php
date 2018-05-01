@@ -13,7 +13,7 @@
 	if (isset($_POST['save'])) {
 		$mail = $_POST['mail'];
 		$items = $_POST['items'];
-		$price = (int)$_POST['price'];
+		$price = $_POST['price'];
 		$date = $_POST['date'];
 		$status = $_POST['status'];
 		mysqli_query($db, "INSERT INTO amritindia.order (email, items, price, orderDate, status) VALUES ('$mail','$items', '$price', '$date', '$status')");
@@ -22,14 +22,14 @@
 	}
 
 	if (isset($_POST['update'])) {
+
 		$id = $_POST['id'];
 		$mail = $_POST['mail'];
 		$items = $_POST['items'];
-		$price = (int)$_POST['price'];
-		$date = $_POST['date'];
+		$price = $_POST['price'];
 		$status = $_POST['status'];
-		mysqli_query($db, "UPDATE amritindia.order SET email='$mail', items='$items', price='$price', orderDate='$date', status='$status' WHERE orderID=$id");
-		$_SESSION['message'] = "Order updated!";
+		
+		mysqli_query($db, "UPDATE amritindia.order SET email='$mail', items='$items', price='$price', status='$status' WHERE orderID=$id");
 		header('location: order.php');
 	}
 

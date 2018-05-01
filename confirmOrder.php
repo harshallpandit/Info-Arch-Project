@@ -127,7 +127,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				$pending = "pending"; 
 				$sql = "insert into amritindia.order (email, items, price, orderDate, status)values('$email', '$purchase', '$price', '$orderDate', '$pending')";
 				
-				if($conn->query($sql)) {	
+				if($conn->query($sql)) {
+
+				ini_set("SMTP","localhost");
+ini_set("smtp_port","26");	
+					mail($email, "Amrit India Order Confirmed!", wordwrap("Thank you for ordering with us. Your total bill amount is - " . $price . ". Please check the status of your order on the user dashboard.", 70), "FROM: admin@amritindia.com");
 		?>
 	<div class="menu">
 		<div class="container">

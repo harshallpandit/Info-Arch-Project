@@ -128,7 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="Popular-Restaurants-grids">
 				<div class="container">
 					<div class="Popular-Restaurants-grid wow fadeInRight" data-wow-delay="0.4s">
-						<table class="table table-bordered" style="font-size: 22px">
+						<table class="table table-bordered" style="font-size: 22px;">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Mail</th>
@@ -160,7 +160,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <br>
 <hr />
 <br>
-<form method="post" action="odredit.php" >
+<form method="post" action="odredit.php" style="width: 50%" >
 	<input type="hidden" name="id" value="<?php echo $id; ?>">
 	<div class="form-group">
 		<label>Email</label>
